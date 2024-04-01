@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-image: url(latte.jpg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: 70px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c06b3e;
+        }
+
+        /* Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Transaction Details</h2>
+        <form id="transactionForm" onsubmit="return submitForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+            <label for="number">Number:</label>
+            <input type="text" id="number" name="number" required placeholder="Enter your phone number">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required placeholder="Enter your location">
+
+            <label for="option">Option:</label>
+            <select id="option" name="option" required>
+                <option value="" disabled selected hidden>Choose an option</option>
+                <option value="cash">Cash on Delivery</option>
+                <option value="pickup">Pick Up</option>
+            </select>
+            <div id="fee" style="display: none;">
+                <label for="feeDisplay">Fee Charge:<span id="feeDisplay"></span></label>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            // You can add form validation here if needed
+            // For now, let's assume the form is always valid
+            window.location.href = "proceed.html";
+            return false; // Prevent default form submission
+        }
+
+        document.getElementById('option').addEventListener('change', function () {
+            var selectedOption = this.value;
+
+            // Check if the selected option is "Cash on Delivery"
+            if (selectedOption === 'cash') {
+                // Display the fee charge
+                document.getElementById('feeDisplay').textContent = '50 pesos';
+                document.getElementById('fee').style.display = 'block';
+            } else {
+                // Hide the fee charge if not cash on delivery
+                document.getElementById('fee').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
